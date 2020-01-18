@@ -1,6 +1,7 @@
 package com.albiesoft.countriesapp.di;
 
 import com.albiesoft.countriesapp.service.CountriesApi;
+import com.albiesoft.countriesapp.service.CountriesService;
 
 import dagger.Module;
 import dagger.Provides;
@@ -21,5 +22,10 @@ public class ApiModul {
              .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
              .build()
              .create(CountriesApi.class);
+    }
+
+    @Provides
+    public CountriesService provideCountriesService(){
+        return CountriesService.getInstance();
     }
 }

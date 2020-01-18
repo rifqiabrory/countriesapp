@@ -3,10 +3,13 @@ package com.albiesoft.countriesapp.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.albiesoft.countriesapp.di.DaggerApiComponent;
 import com.albiesoft.countriesapp.service.CountriesService;
 import com.albiesoft.countriesapp.model.CountryModel;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -19,10 +22,16 @@ public class ListViewModel extends ViewModel {
     public MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
     // add service (retrofit)
-    private CountriesService service = CountriesService.getInstance();
+    @Inject
+    public CountriesService service;
 
     // add guard
     private CompositeDisposable disposable = new CompositeDisposable();
+
+    public ListViewModel(){
+        super();
+        DaggerApiComponent.create().injectNetwork(this);
+    }
 
     public void refresh(){
         fetchCountries();

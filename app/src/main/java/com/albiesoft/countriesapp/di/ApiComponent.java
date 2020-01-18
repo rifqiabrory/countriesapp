@@ -1,6 +1,7 @@
 package com.albiesoft.countriesapp.di;
 
 import com.albiesoft.countriesapp.service.CountriesService;
+import com.albiesoft.countriesapp.viewmodel.ListViewModel;
 
 import dagger.Component;
 
@@ -8,4 +9,6 @@ import dagger.Component;
 public interface ApiComponent {
 
     void injectCountry(CountriesService service);
+
+    void injectNetwork(ListViewModel viewModel);
 }
